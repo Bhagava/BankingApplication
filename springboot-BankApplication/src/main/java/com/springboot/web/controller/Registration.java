@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.web.model.Admin;
 import com.springboot.web.model.User;
 import com.springboot.web.service.RegisterService;
 
@@ -48,5 +49,25 @@ public class Registration {
 			throw new Exception("====User not exist=====");
 		}
 		return Obj;
+	}
+	
+	
+	@RequestMapping(path = "/admin", method = RequestMethod.POST)
+	@CrossOrigin(origins = "http://localhost:4200")
+	public void doAdminLogin(@RequestBody Admin admin) throws Exception
+	{
+		String adminemail = admin.getEmailid();
+		String adminpassword = admin.getPassword();
+		
+		if(adminemail.equals("admin") && adminpassword.equals("admin"))
+		{
+			System.out.println("admin successfully login");
+		}
+		else
+		{
+			throw new Exception("credentials are wrong");
+		}
+		
+		
 	}
 }
