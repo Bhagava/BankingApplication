@@ -1,21 +1,21 @@
 package com.springboot.web.model;
 
-import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
+import javax.persistence.OneToOne;
 
 @Entity
-public class User implements Serializable {
+public class User {
 	
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+//	/**
+//	 * 
+//	 */
+//	private static final long serialVersionUID = 1L;
 
 
 	@Id
@@ -30,15 +30,18 @@ public class User implements Serializable {
 	private String address;
 	private String password;
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int primay_id;
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int savings_id;
+//	@GeneratedValue
+//	private int primary_id;
+//
+//	@GeneratedValue
+//	private int savings_id;
+	
+	@OneToOne
+	private PrimaryAccount primaryAccount;
 	
 	
-	
+	@OneToOne
+	private SavingsAccount savingsAccount;
 	
 	public User() {
 	}
@@ -99,11 +102,11 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-//	public int getPrimay_id() {
-//		return primay_id;
+//	public int getPrimary_id() {
+//		return primary_id;
 //	}
-//	public void setPrimay_id(int primay_id) {
-//		this.primay_id = primay_id;
+//	public void setPrimay_id(int primary_id) {
+//		this.primary_id = primary_id;
 //	}
 //	public int getSavings_id() {
 //		return savings_id;
@@ -123,7 +126,7 @@ public class User implements Serializable {
 		result = prime * result + ((mailid == null) ? 0 : mailid.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((phonenumber == null) ? 0 : phonenumber.hashCode());
-//		result = prime * result + primay_id;
+//		result = prime * result + primary_id;
 //		result = prime * result + savings_id;
 		return result;
 	}
@@ -173,7 +176,7 @@ public class User implements Serializable {
 				return false;
 		} else if (!phonenumber.equals(other.phonenumber))
 			return false;
-//		if (primay_id != other.primay_id)
+//		if (primary_id != other.primary_id)
 //			return false;
 //		if (savings_id != other.savings_id)
 //			return false;
@@ -183,9 +186,12 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [ Fullname=" + fullname + ", Surname=" + surname + ", mailid=" + mailid
-				+ ", phonenumber=" + phonenumber + ", Address=" + address + ", password=" + password +"]";
+		return "User [id=" + id + ", fullname=" + fullname + ", surname=" + surname + ", mailid=" + mailid
+				+ ", phonenumber=" + phonenumber + ", address=" + address + ", password=" + password + "]";
 	}
+
+
+	
 	
 	
 }

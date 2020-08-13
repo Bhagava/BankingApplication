@@ -1,6 +1,8 @@
 package com.springboot.web.controller;
 
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +25,7 @@ public class Registration {
 	
 	
 	@RequestMapping(path="/register", method = RequestMethod.POST)
-	@CrossOrigin(origins = "http://localhost:4200")
+//	@CrossOrigin(origins = "http://localhost:4200")
 	public User registerAddUser(@RequestBody User user)
 	{
 		User Obj;
@@ -33,8 +35,8 @@ public class Registration {
 	
 	
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
-	@CrossOrigin(origins = "http://localhost:4200")
-	public User doLogin(@RequestBody User user) throws Exception
+//	@CrossOrigin(origins = "http://localhost:4200")
+	public User doLogin(@RequestBody User user, HttpSession  session) throws Exception
 	{
 		String temperorymail = user.getMailid();
 		String temperorypassword = user.getPassword();
@@ -42,6 +44,7 @@ public class Registration {
 		if(temperorymail != null && temperorypassword != null)
 		{
 			Obj = registerService.matchEmailPassword(temperorymail, temperorypassword);
+			//session.setAttribute("mailid",temperorymail );
 		}
 		
 		if(Obj == null)
@@ -53,7 +56,7 @@ public class Registration {
 	
 	
 	@RequestMapping(path = "/admin", method = RequestMethod.POST)
-	@CrossOrigin(origins = "http://localhost:4200")
+//	@CrossOrigin(origins = "http://localhost:4200")
 	public void doAdminLogin(@RequestBody Admin admin) throws Exception
 	{
 		String adminemail = admin.getEmailid();
