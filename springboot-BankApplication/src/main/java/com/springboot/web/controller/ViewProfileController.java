@@ -17,10 +17,10 @@ public class ViewProfileController {
 	RegisterService registerService;
 	
 	
-	@RequestMapping("/viewpage")
-	public User viewprofile(@RequestBody User user)
-	{
-		String temperorymail = user.getMailid();
-		return registerService.viewpage(temperorymail);
-	}
+//	@RequestMapping("/viewpage")
+//	public User viewprofile(@RequestBody User user)
+//	{
+//		String temperorymail = user.getMailid();
+//		return registerService.viewpage(temperorymail);
+//	}
 }

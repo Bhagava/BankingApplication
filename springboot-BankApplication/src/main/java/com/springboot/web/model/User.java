@@ -28,12 +28,13 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "userId", nullable = false, updatable = false)
 	private Long id;
 	
 	
 	private String fullname;
 	private String surname;
+	
+	@Column(name = "mailid", unique = true)
 	private String mailid;
 	private Long phonenumber;
 	private String address;
@@ -52,12 +53,15 @@ public class User {
 	@OneToOne
 	private SavingsAccount savingsAccount;
 	
-	 @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	 @JsonIgnore
-	 private List<Chequebook> ChequeBookList;
-
-
-
+	
+	//, cascade = CascadeType.ALL, fetch = FetchType.LAZY
+//	@OneToMany(targetEntity = Chequebook.class, cascade = CascadeType.ALL)
+//	@JoinColumn(name="cb-fk", referencedColumnName = "id")
+	
+	
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	private List<Chequebook> ChequeBookList;
 	
 
 	public User(Long id, String fullname, String surname, String mailid, Long phonenumber, String address,
@@ -73,7 +77,7 @@ public class User {
 		this.status = status;
 		this.primaryAccount = primaryAccount;
 		this.savingsAccount = savingsAccount;
-		ChequeBookList = chequeBookList;
+		chequeBookList = chequeBookList;
 	}
 
 

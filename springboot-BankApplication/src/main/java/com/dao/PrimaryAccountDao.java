@@ -6,4 +6,5 @@ import com.springboot.web.model.PrimaryAccount;
 
 public interface PrimaryAccountDao  extends JpaRepository< PrimaryAccount,Integer>{
 	PrimaryAccount findByAccountNumber(Long accountNumber);
+
 }

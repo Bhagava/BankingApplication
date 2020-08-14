@@ -25,6 +25,9 @@ public class RegisterService {
 	@Autowired
 	AccountService accountService;
 	
+	@Autowired
+	ChequeBookService chequeBookService;
+	
 	public User saveaddUser(User user)
 	{
 	
@@ -40,8 +43,20 @@ public class RegisterService {
 		return repo.findByMailidAndPassword(mailid, password);
 	}
 	
-	public User viewpage(String mailid)
-	{
+//	public User viewpage(String mailid)
+//	{
+//		return repo.findByMailid(mailid);
+//	}
+
+
+
+	public List<User> getUserDetails() {
+		return repo.findAll();
+	}
+
+
+
+	public List<User> getUserbyemail(String mailid) {
 		return repo.findByMailid(mailid);
 	}
 }

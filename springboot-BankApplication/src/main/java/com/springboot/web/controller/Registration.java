@@ -1,10 +1,13 @@
 package com.springboot.web.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -78,7 +81,23 @@ public class Registration {
 		{
 			throw new Exception("credentials are wrong");
 		}
-		
-		
+	}
+	
+	
+	@RequestMapping(path="/getuserId/{email}", method = RequestMethod.GET)
+	public List<User> getuserByEmail(@PathVariable String email)
+	{
+		return registerService.getUserbyemail(email);
+	}
+	
+	
+	
+	
+	
+	
+	@RequestMapping(path = "/getuser", method = RequestMethod.GET)
+	public List<User> getUserDetails()
+	{
+		return registerService.getUserDetails();
 	}
 }

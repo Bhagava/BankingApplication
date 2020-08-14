@@ -2,10 +2,13 @@ package com.springboot.web.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.eclipse.jdt.internal.compiler.ast.FalseLiteral;
 
 
 @Entity
@@ -13,23 +16,28 @@ public class Chequebook {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "chequeId", nullable = false, updatable = false)
+	@Column(name = "cid", nullable = false, updatable = false)
 	private Long id;
 	private String description;
-	private boolean request;
+	private String request = "false";
 	
-	@ManyToOne
-    private User user;
+//	@ManyToOne
+//	@JoinColumn(name = "userid", insertable = false, updatable = false)
+	
+	
+	@ManyToOne(targetEntity = User.class)
+	@JoinColumn(name = "cid", nullable = false, insertable = false, updatable = false)
+	private User user;
 
 	public Chequebook()
 	{
 		
 	}
 	
-	public Chequebook(Long id, String description, boolean request) {
+	public Chequebook(Long id, String description, User user) {
 		this.id = id;
 		this.description = description;
-		this.request = request;
+		this.user=user;
 	}
 	
 	public Long getId() {
@@ -44,10 +52,10 @@ public class Chequebook {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public boolean isRequest() {
+	public String isRequest() {
 		return request;
 	}
-	public void setRequest(boolean request) {
+	public void setRequest(String request) {
 		this.request = request;
 	}
 	
