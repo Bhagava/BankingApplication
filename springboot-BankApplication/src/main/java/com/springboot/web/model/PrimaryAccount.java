@@ -1,33 +1,52 @@
 package com.springboot.web.model;
 
-import javax.persistence.Column;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
 public class PrimaryAccount {
+	
 	@Id
 	@GeneratedValue
-	
-	@Column(name = "primary_id")
 	private int id;
 	private Long accountNumber;
 	private Double accountbalance;
 	
-	public PrimaryAccount(Long accountNumber, Double accountbalance) {
-		super();
-		this.accountNumber = accountNumber;
-		this.accountbalance = accountbalance;
-	}
+	
+//	@OneToMany(mappedBy = "primaryAccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JsonIgnore
+//    private List<PrimaryTransaction> primaryTransactionList;
+//	
+//	
+//	public List<PrimaryTransaction> getPrimaryTransactionList() {
+//		return primaryTransactionList;
+//	}
+
+
+//	public void setPrimaryTransactionList(List<PrimaryTransaction> primaryTransactionList) {
+//		this.primaryTransactionList = primaryTransactionList;
+//	}
+
+
 	public PrimaryAccount() {
 	}
 	
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public Long getAccountNumber() {
 		return accountNumber;
 	}
@@ -40,13 +59,6 @@ public class PrimaryAccount {
 	public void setAccountbalance(Double accountbalance) {
 		this.accountbalance = accountbalance;
 	}
-	
-	@Override
-	public String toString() {
-		return "PrimaryAccount [id=" + id + ", accountNumber=" + accountNumber + ", accountbalance=" + accountbalance
-				+ "]";
-	}
-	
 	
 	
 }

@@ -1,12 +1,20 @@
 package com.springboot.web.model;
 
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -19,7 +27,8 @@ public class User {
 
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "userId", nullable = false, updatable = false)
 	private Long id;
 	
 	
@@ -29,6 +38,7 @@ public class User {
 	private Long phonenumber;
 	private String address;
 	private String password;
+	private String status;
 	
 //	@GeneratedValue
 //	private int primary_id;
@@ -39,159 +49,147 @@ public class User {
 	@OneToOne
 	private PrimaryAccount primaryAccount;
 	
-	
 	@OneToOne
 	private SavingsAccount savingsAccount;
 	
-	public User() {
-	}
+	 @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	 @JsonIgnore
+	 private List<Chequebook> ChequeBookList;
+
+
+
 	
-	
-	public User( String fullname, String surname, String mailid, Long phonenumber, String address,
-			String password) {
-		super();
+
+	public User(Long id, String fullname, String surname, String mailid, Long phonenumber, String address,
+			String password, String status, PrimaryAccount primaryAccount, SavingsAccount savingsAccount,
+			List<Chequebook> chequeBookList) {
+		this.id = id;
 		this.fullname = fullname;
 		this.surname = surname;
 		this.mailid = mailid;
 		this.phonenumber = phonenumber;
 		this.address = address;
 		this.password = password;
+		this.status = status;
+		this.primaryAccount = primaryAccount;
+		this.savingsAccount = savingsAccount;
+		ChequeBookList = chequeBookList;
 	}
+
+
+
+
+	public User()
+	{
+		
+	}
+
 	
 	
 	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public Long getId() {
 		return id;
 	}
+
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+
 	public String getFullname() {
 		return fullname;
 	}
+
+
 	public void setFullname(String fullname) {
 		this.fullname = fullname;
 	}
+
+
 	public String getSurname() {
 		return surname;
 	}
+
+
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
+
+
 	public String getMailid() {
 		return mailid;
 	}
+
+
 	public void setMailid(String mailid) {
 		this.mailid = mailid;
 	}
+
+
 	public Long getPhonenumber() {
 		return phonenumber;
 	}
+
+
 	public void setPhonenumber(Long phonenumber) {
 		this.phonenumber = phonenumber;
 	}
+
+
 	public String getAddress() {
 		return address;
 	}
+
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+
 	public String getPassword() {
 		return password;
 	}
+
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-//	public int getPrimary_id() {
-//		return primary_id;
-//	}
-//	public void setPrimay_id(int primary_id) {
-//		this.primary_id = primary_id;
-//	}
-//	public int getSavings_id() {
-//		return savings_id;
-//	}
-//	public void setSavings_id(int savings_id) {
-//		this.savings_id = savings_id;
-//	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((fullname == null) ? 0 : fullname.hashCode());
-		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((mailid == null) ? 0 : mailid.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((phonenumber == null) ? 0 : phonenumber.hashCode());
-//		result = prime * result + primary_id;
-//		result = prime * result + savings_id;
-		return result;
+
+
+	public PrimaryAccount getPrimaryAccount() {
+		return primaryAccount;
 	}
 
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (fullname == null) {
-			if (other.fullname != null)
-				return false;
-		} else if (!fullname.equals(other.fullname))
-			return false;
-		if (surname == null) {
-			if (other.surname != null)
-				return false;
-		} else if (!surname.equals(other.surname))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (mailid == null) {
-			if (other.mailid != null)
-				return false;
-		} else if (!mailid.equals(other.mailid))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (phonenumber == null) {
-			if (other.phonenumber != null)
-				return false;
-		} else if (!phonenumber.equals(other.phonenumber))
-			return false;
-//		if (primary_id != other.primary_id)
-//			return false;
-//		if (savings_id != other.savings_id)
-//			return false;
-		return true;
+	public void setPrimaryAccount(PrimaryAccount primaryAccount) {
+		this.primaryAccount = primaryAccount;
 	}
 
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", fullname=" + fullname + ", surname=" + surname + ", mailid=" + mailid
-				+ ", phonenumber=" + phonenumber + ", address=" + address + ", password=" + password + "]";
+	public SavingsAccount getSavingsAccount() {
+		return savingsAccount;
 	}
 
 
-	
-	
-	
+	public void setSavingsAccount(SavingsAccount savingsAccount) {
+		this.savingsAccount = savingsAccount;
+	}
+
+	public List<Chequebook> getChequeBookList() {
+		return ChequeBookList;
+	}
+
+	public void setChequeBookList(List<Chequebook> chequeBookList) {
+		ChequeBookList = chequeBookList;
+	}
+		
 }

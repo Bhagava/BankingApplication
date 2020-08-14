@@ -1,20 +1,16 @@
 package com.springboot.web.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
 
 @Entity
 public class SavingsAccount {
+	
+	
 	@Id
 	@GeneratedValue
-	
-	@Column(name = "savings_id")
 	private int id;
 	private Long accountnumber;
 	private Double accountbalance;
@@ -61,6 +57,14 @@ public class SavingsAccount {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Long getAccountnumber() {
