@@ -10,12 +10,12 @@ import org.springframework.stereotype.Repository;
 import com.springboot.web.model.User;
 
 @Repository
-public interface MyRepo extends JpaRepository<User, Integer>{
+public interface MyRepo extends JpaRepository<User, Long>{
 	User findById(Long id);
 	
 	
-	@Query("FROM User where mailid =?1")
-	List<User> findByMailid(String mailid);
+//	@Query("FROM User where mailid =?1")
+	User findByMailid(String mailid);
 	//User findByMailid(String mailid);
 	User findByPhonenumber(Long phonenumber);
 	User deleteById(Long id);

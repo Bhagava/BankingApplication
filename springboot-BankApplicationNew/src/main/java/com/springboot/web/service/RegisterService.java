@@ -56,7 +56,7 @@ public class RegisterService {
 
 
 
-	public List<User> getUserbyemail(String mailid) {
-		return repo.findByMailid(mailid);
-	}
+//	public List<User> getUserbyemail(String mailid) {
+//		return repo.findByMailid(mailid);
+//	}
 }

@@ -12,4 +12,7 @@ public class Transaction {
 	@Autowired
 	private Registration registration;
 	
+	
+	
+	
 }

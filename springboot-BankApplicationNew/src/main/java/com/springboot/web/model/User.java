@@ -60,7 +60,8 @@ public class User {
 	
 	
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Chequebook> ChequeBookList;
 	
 
@@ -77,7 +78,6 @@ public class User {
 		this.status = status;
 		this.primaryAccount = primaryAccount;
 		this.savingsAccount = savingsAccount;
-		chequeBookList = chequeBookList;
 	}
 
 

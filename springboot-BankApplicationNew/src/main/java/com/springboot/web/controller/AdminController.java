@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 	import org.springframework.web.bind.annotation.RestController;
 
 	import com.dao.MyRepo;
-	import com.springboot.web.model.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.springboot.web.model.User;
 
 	@RestController
 	public class AdminController {
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 		
 		@RequestMapping("/viewusers")
 		@CrossOrigin(origins = "http://localhost:4200")
+//		@JsonIgnore
 		public List<User> viewusers(){
 			return repo.findAll();
 			

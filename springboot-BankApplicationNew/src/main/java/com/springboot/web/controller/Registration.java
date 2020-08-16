@@ -84,11 +84,11 @@ public class Registration {
 	}
 	
 	
-	@RequestMapping(path="/getuserId/{email}", method = RequestMethod.GET)
-	public List<User> getuserByEmail(@PathVariable String email)
-	{
-		return registerService.getUserbyemail(email);
-	}
+//	@RequestMapping(path="/getuserId/{email}", method = RequestMethod.GET)
+//	public List<User> getuserByEmail(@PathVariable String email)
+//	{
+//		return registerService.getUserbyemail(email);
+//	}
 	
 	
 	
